@@ -101,8 +101,8 @@
             top: 15px;
             width: 28px;
             height: 28px;
-            background: #ddd; /* 視認性向上のため濃く変更 */
-            color: #666; /* コントラスト調整 */
+            background: #ddd;
+            color: #666;
             border-radius: 50%;
             display: none;
             align-items: center;
@@ -217,7 +217,7 @@
     <button class="main-btn" id="convertBtn">Convert & Copy</button>
 
     <div class="footer-btns">
-        <a href="https://ko-fi.com/afrorakda" target="_blank" class="kofi-btn">☕️buy me a coffee</a>
+        <a href="https://ko-fi.com/afrorakda" target="_blank" class="kofi-btn">☕️Buy me a coffee</a>
         <button class="home-btn" id="homeBtn">Add to Home Screen</button>
     </div>
 
@@ -256,15 +256,17 @@
     convertBtn.addEventListener('click', () => {
         if (!input.value.trim()) return;
 
+        const start = input.selectionStart; // カーソル位置保持
         const processed = input.value.split('\n').map(line => {
             return line.trim() === '' ? INVISIBLE_CHAR : line;
         }).join('\n');
 
         input.value = processed;
+        input.setSelectionRange(start, start); // カーソル位置を復元
         updateCounter();
 
         navigator.clipboard.writeText(processed).then(() => {
-            statusMsg.textContent = `✨ Fixed & Copied!`; // メッセージ短縮
+            statusMsg.textContent = `✨ Fixed & Copied!`;
             statusMsg.style.opacity = '1';
             
             const originalText = convertBtn.textContent;
