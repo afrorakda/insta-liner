@@ -101,8 +101,8 @@
             top: 15px;
             width: 28px;
             height: 28px;
-            background: rgba(0,0,0,0.05);
-            color: #888;
+            background: #ddd; /* 視認性向上のため濃く変更 */
+            color: #666; /* コントラスト調整 */
             border-radius: 50%;
             display: none;
             align-items: center;
@@ -260,12 +260,11 @@
             return line.trim() === '' ? INVISIBLE_CHAR : line;
         }).join('\n');
 
-        // textareaの中身を同期
         input.value = processed;
         updateCounter();
 
         navigator.clipboard.writeText(processed).then(() => {
-            statusMsg.textContent = `✨ Layout fixed & Copied!`;
+            statusMsg.textContent = `✨ Fixed & Copied!`; // メッセージ短縮
             statusMsg.style.opacity = '1';
             
             const originalText = convertBtn.textContent;
